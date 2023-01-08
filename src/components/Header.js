@@ -8,7 +8,7 @@ class Header extends Component {
     const number = 0;
     return (
       <div>
-        <p data-testid="email-field">{ `Email:${email}` }</p>
+        <p data-testid="email-field">{ `Email: ${email}` }</p>
         <p data-testid="total-field">{`Despesa total: R$${number}`}</p>
         <p data-testid="header-currency-field">BRL</p>
       </div>

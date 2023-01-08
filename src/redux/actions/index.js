@@ -33,9 +33,10 @@ export const fetchCoinsFailure = (errorMessage) => ({
 
 const fetchCurrencies = async (endPoint) => {
   const coins = await fetch(endPoint);
-  const data = coins.json();
+  const data = await coins.json();
   delete data.USDT;
-  return [data];
+  const result = Object.keys(data);
+  return result;
 };
 
 export const fetchCoinsThunk = () => async (dispatch) => {
