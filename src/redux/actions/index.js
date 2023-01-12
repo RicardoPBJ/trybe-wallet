@@ -4,6 +4,10 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const FETCH_COINS_REQUEST = 'FETCH_COINS_REQUEST';
 export const FETCH_COINS_SUCCESS = 'FETCH_COINS_SUCCESS';
 export const FETCH_COINS_FAILURE = 'FETCH_COINS_FAILURE';
+export const USER_EXPENSES = 'USER_EXPENSES';
+export const FETCH_EXCHANGE_REQUEST = 'FETCH_EXCHANGE_REQUEST';
+export const FETCH_EXCHANGE_SUCCESS = 'FETCH_EXCHANGE_SUCCESS';
+export const FETCH_EXCHANGE_FAILURE = 'FETCH_EXCHANGE_FAILURE';
 
 // Actions
 
@@ -46,5 +50,65 @@ export const fetchCoinsThunk = () => async (dispatch) => {
     dispatch(fetchCoinsSuccess(coins));
   } catch (error) {
     dispatch(fetchCoinsFailure('Algo deu errado'));
+  }
+};
+
+export const userExpenses = ({
+  id,
+  value,
+  description,
+  currency,
+  method,
+  tag,
+  data,
+}) => ({
+  type: USER_EXPENSES,
+  payload: {
+    expenses: {
+      id,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: {
+        ...data,
+      },
+    },
+  },
+});
+
+export const fetchExchanges = async (endPoint) => {
+  const infos = await fetch(endPoint);
+  const data = await infos.json();
+  delete data.USDT;
+  return data;
+};
+
+export const fetchExchangesRequest = () => ({
+  type: FETCH_EXCHANGE_REQUEST,
+});
+
+export const fetchExchangesSuccess = (data) => ({
+  type: FETCH_EXCHANGE_SUCCESS,
+  payload: {
+    currencyInfo: data,
+  },
+});
+
+export const fetchExchangesFailure = (errorMessage) => ({
+  type: FETCH_COINS_FAILURE,
+  payload: {
+    currencyErrorMessage: errorMessage,
+  },
+});
+
+export const fetchExchangesThunk = () => async (dispatch) => {
+  try {
+    dispatch(fetchExchangesRequest());
+    const currency = await fetchExchanges('https://economia.awesomeapi.com.br/json/all');
+    dispatch(fetchExchangesSuccess(currency));
+  } catch (error) {
+    dispatch(fetchExchangesFailure('Algo deu errado na requisição do currency'));
   }
 };
