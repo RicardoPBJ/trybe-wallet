@@ -61,6 +61,7 @@ class Login extends React.Component {
       <div>
         <form>
           <label htmlFor="email-input">
+            Email:
             <input
               name="email"
               id="email-input"
@@ -70,6 +71,7 @@ class Login extends React.Component {
             />
           </label>
           <label htmlFor="password-input">
+            Senha:
             <input
               name="password"
               id="password-input"
