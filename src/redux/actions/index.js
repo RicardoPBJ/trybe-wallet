@@ -8,6 +8,7 @@ export const USER_EXPENSES = 'USER_EXPENSES';
 export const FETCH_EXCHANGE_REQUEST = 'FETCH_EXCHANGE_REQUEST';
 export const FETCH_EXCHANGE_SUCCESS = 'FETCH_EXCHANGE_SUCCESS';
 export const FETCH_EXCHANGE_FAILURE = 'FETCH_EXCHANGE_FAILURE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 // Actions
 
@@ -112,3 +113,8 @@ export const fetchExchangesThunk = () => async (dispatch) => {
     dispatch(fetchExchangesFailure('Algo deu errado na requisição do currency'));
   }
 };
+
+export const deleteExpenses = (expenses) => ({
+  type: DELETE_EXPENSE,
+  payload: expenses,
+});

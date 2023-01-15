@@ -7,6 +7,7 @@ import {
   FETCH_COINS_REQUEST,
   FETCH_COINS_SUCCESS,
   USER_EXPENSES,
+  DELETE_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -52,6 +53,12 @@ const walletReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.payload.expenses],
+    };
+  }
+  case DELETE_EXPENSE: {
+    return {
+      ...state,
+      expenses: action.payload,
     };
   }
   default: return state;

@@ -13,7 +13,7 @@ class Header extends Component {
 
   render() {
     const { email, expenses } = this.props;
-    let total = '00.00';
+    let total = '0.00';
     if (expenses.length > 0) {
       total = this.calculateTotal(expenses);
     }
